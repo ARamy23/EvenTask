@@ -22,6 +22,11 @@ class IsValidPassword: BaseValidator {
                 return
             }
         }
-        throw NotValidPasswordError()
+        throw error()
+    }
+    
+    func error() -> NSError {
+        return NSError(domain: "NotValidPassword", code: 100,
+                       userInfo: [NSLocalizedDescriptionKey: "Please enter a valid password with at least 8 characters"])
     }
 }

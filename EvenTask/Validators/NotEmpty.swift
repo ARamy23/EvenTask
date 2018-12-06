@@ -20,12 +20,17 @@ class NotEmpty: BaseValidator {
     func orThrow() throws {
         switch value {
         case 0 as Int:
-            throw EmptyValueError(key: key)
+            throw error()
         case 0.0 as Float:
-            throw EmptyValueError(key: key)
+            throw error()
         case "" as String:
-            throw EmptyValueError(key: key)
+            throw error()
         default: break
         }
+    }
+    
+    func error() -> NSError {
+        return NSError(domain: "EmptyException", code: 100,
+                       userInfo: [NSLocalizedDescriptionKey: "Please fill in the \(key) value"])
     }
 }
