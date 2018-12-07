@@ -22,6 +22,11 @@ class NotOptional: BaseValidator {
         if let _ = value {
             return
         }
-        throw NotFoundError(key: key)
+        throw error()
+    }
+    
+    func error() -> NSError {
+        return NSError(domain: "NotFoundException", code: 100,
+                       userInfo: [NSLocalizedDescriptionKey: "\(key) is Empty"])
     }
 }
